@@ -19,7 +19,7 @@ entity main_block is
 		button_in	: in std_logic;
 		ps2_code_in	: in std_logic_vector(0 to 7);
 		ps2_code_new_in : in std_logic;
-		indicator_out	: out natural range 0 to 7;
+		indicator_out	: out std_logic_vector(0 to 7);
 		nios	: in std_logic
 	);
 

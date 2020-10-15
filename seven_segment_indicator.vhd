@@ -5,9 +5,9 @@ entity seven_segment_indicator is
 
 	port 
 	(
-		clk		  : in std_logic;
-		button_in  : in std_logic;
-		button_out : out std_logic
+		sck		  : in std_logic;
+		indicator_in  : in std_logic_vector(0 to 7);
+		data_out : out std_logic_vector(0 to 15)
 	);
 
 end seven_segment_indicator;

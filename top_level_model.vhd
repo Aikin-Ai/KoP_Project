@@ -74,7 +74,7 @@ architecture rtl of top_level_model is
 			ps2_clk   : in std_logic;
 			ps2_data  : in std_logic;
 			ps2_code_new : out std_logic;
-			ps2_code     : out std_logic_vector(0 to 8)
+			ps2_code     : out std_logic_vector(0 to 7)
 		);
 	
 	end component PS2_controller;
@@ -86,8 +86,9 @@ architecture rtl of top_level_model is
 	signal clk_main		: std_logic;
 	signal clk_ps2		: std_logic;
 	signal clk_indicator: std_logic;
-	signal ps2_code		: std_logic_vector(0 to 8);
+	signal ps2_code		: std_logic_vector(0 to 7);
 	signal ps2_code_new : std_logic;
+	signal nios			: std_logic;
 begin
 
 	l_bc : button_controller port map(
@@ -103,10 +104,17 @@ begin
 		clk_indicator => clk_indicator
 		);
 	l_ps2 : PS2_controller port map(
-		clk	=> clk,
+		clk	=> clk_ps2,
 		ps2_clk	=> ps2_clk,
 		ps2_data => ps2_data,
 		ps2_code_new => ps2_code_new,
 		ps2_code => ps2_code
+	);
+	l_main : main_block port map(
+		clk => clk_main,
+		button_in => button_out,
+		ps2_code_in => ps2_code,
+		ps2_code_new_in => ps2_code_new,
+		nios => nios
 	);
 end rtl;

@@ -9,7 +9,7 @@ entity PS2_controller is
 		ps2_clk   : in std_logic;
         ps2_data  : in std_logic;
         ps2_code_new : out std_logic;
-        ps2_code     : out std_logic_vector(0 to 8)
+        ps2_code     : out std_logic_vector(0 to 7)
 	);
 
 end PS2_controller;

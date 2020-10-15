@@ -27,12 +27,6 @@ end main_block;
 
 architecture rtl of main_block is
 
-	-- Build a 2-D array type for the RAM
-	subtype word_t is std_logic_vector((DATA_WIDTH-1) downto 0);
-	type memory_t is array(2**ADDR_WIDTH-1 downto 0) of word_t;
-
-	-- Declare the RAM signal.	
-	signal ram : memory_t;
 
 begin
 

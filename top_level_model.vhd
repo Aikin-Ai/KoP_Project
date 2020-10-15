@@ -33,7 +33,8 @@ architecture rtl of top_level_model is
 	(
 		clk	: in std_logic;
 		button_in	: in std_logic;
-		ps2_in	: in natural range 0 to 7;
+		ps2_code_in	: in std_logic_vector(0 to 7);
+		ps2_code_new_in : in std_logic;
 		indicator_out	: out natural range 0 to 7;
 		nios	: in std_logic
 	);

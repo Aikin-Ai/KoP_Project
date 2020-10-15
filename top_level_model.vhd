@@ -14,7 +14,7 @@ entity top_level_model is
 		clk	: in std_logic;
 		button_in	: in std_logic;
 		indicator_out	: out std_logic;
-		keyboair_in	: in std_logic
+		keyboair_in	: in std_logic;
 		ps2_clk   : in std_logic;
         ps2_data  : in std_logic
 	);
@@ -87,7 +87,7 @@ architecture rtl of top_level_model is
 	signal clk_main		: std_logic;
 	signal clk_ps2		: std_logic;
 	signal clk_indicator: std_logic;
-	signal ps2_code		: std_logic_vector(0 to 8)
+	signal ps2_code		: std_logic_vector(0 to 8);
 	signal ps2_code_new : std_logic;
 begin
 
@@ -109,5 +109,5 @@ begin
 		ps2_data => ps2_data,
 		ps2_code_new => ps2_code_new,
 		ps2_code => ps2_code
-	)
+	);
 end rtl;

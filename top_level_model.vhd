@@ -13,7 +13,7 @@ entity top_level_model is
 	(
 		clk	: in std_logic;
 		button_in	: in std_logic;
-		indicator_out	: out std_logic;
+		indicator_out_display	: out std_logic_vector(0 to 15);
 		ps2_clk   : in std_logic;
         ps2_data  : in std_logic
 	);
@@ -36,7 +36,7 @@ architecture rtl of top_level_model is
 		button_in	: in std_logic;
 		ps2_code_in	: in std_logic_vector(0 to 7);
 		ps2_code_new_in : in std_logic;
-		indicator_out	: out natural range 0 to 7;
+		indicator_out	: out std_logic_vector(0 to 7);
 		nios	: in std_logic
 	);
 
@@ -78,17 +78,29 @@ architecture rtl of top_level_model is
 		);
 	
 	end component PS2_controller;
+	
+	component seven_segment_indicator is
+
+		port 
+		(
+			sck		  	  : in std_logic;
+			indicator_in  : in std_logic_vector(0 to 7);
+			data_out 	  : out std_logic_vector(0 to 15)
+		);
+	
+	end component seven_segment_indicator;
    --Скопировать entity и переименовать в component для всех блоков
 	
 	--Создаем сигналы для контроллеров
-	signal clk_button 	: std_logic;
-	signal button_out 	: std_logic;
-	signal clk_main		: std_logic;
-	signal clk_ps2		: std_logic;
-	signal clk_indicator: std_logic;
-	signal ps2_code		: std_logic_vector(0 to 7);
-	signal ps2_code_new : std_logic;
-	signal nios			: std_logic;
+	signal clk_button 			: std_logic;
+	signal button_out 			: std_logic;
+	signal clk_main				: std_logic;
+	signal clk_ps2				: std_logic;
+	signal clk_indicator		: std_logic;
+	signal ps2_code				: std_logic_vector(0 to 7);
+	signal ps2_code_new 		: std_logic;
+	signal nios					: std_logic;
+	signal indicator_out_main	: std_logic_vector(0 to 7);
 begin
 
 	l_bc : button_controller port map(
@@ -115,6 +127,12 @@ begin
 		button_in => button_out,
 		ps2_code_in => ps2_code,
 		ps2_code_new_in => ps2_code_new,
-		nios => nios
+		nios => nios,
+		indicator_out => indicator_out_main
+	);
+	l_seven_segm : seven_segment_indicator port map(
+		sck	=> clk_indicator,
+		indicator_in	=> indicator_out_main,
+		data_out => indicator_out_display 
 	);
 end rtl;

@@ -13,7 +13,7 @@ entity top_level_model is
 	(
 		clk	: in std_logic;
 		button_in	: in std_logic;
-		indicator_out_display	: out std_logic_vector(0 to 15);
+		indicator_out_display	: out std_logic;
 		ps2_clk   : in std_logic;
         ps2_data  : in std_logic
 	);
@@ -85,7 +85,7 @@ architecture rtl of top_level_model is
 		(
 			sck		  	  : in std_logic;
 			indicator_in  : in std_logic_vector(0 to 7);
-			data_out 	  : out std_logic_vector(0 to 15)
+			data_out 	  : out std_logic
 		);
 	
 	end component seven_segment_indicator;

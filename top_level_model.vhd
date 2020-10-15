@@ -15,6 +15,8 @@ entity top_level_model is
 		button_in	: in std_logic;
 		indicator_out	: out std_logic;
 		keyboair_in	: in std_logic
+		ps2_clk   : in std_logic;
+        ps2_data  : in std_logic
 	);
 
 end top_level_model;
@@ -64,14 +66,29 @@ architecture rtl of top_level_model is
 	);
 
 	end component frequency_controller;
+
+	component PS2_controller is
+
+		port 
+		(
+			clk		  : in std_logic;
+			ps2_clk   : in std_logic;
+			ps2_data  : in std_logic;
+			ps2_code_new : out std_logic;
+			ps2_code     : out std_logic_vector(0 to 8)
+		);
+	
+	end component PS2_controller;
    --Скопировать entity и переименовать в component для всех блоков
 	
 	--Создаем сигналы для контроллеров
 	signal clk_button 	: std_logic;
 	signal button_out 	: std_logic;
 	signal clk_main		: std_logic;
-	signal clk_ps2			: std_logic;
-	signal clk_indicator : std_logic;
+	signal clk_ps2		: std_logic;
+	signal clk_indicator: std_logic;
+	signal ps2_code		: std_logic_vector(0 to 8)
+	signal ps2_code_new : std_logic;
 begin
 
 	l_bc : button_controller port map(
@@ -86,4 +103,11 @@ begin
 		clk_ps2       => clk_ps2,
 		clk_indicator => clk_indicator
 		);
+	l_ps2 : PS2_controller port map(
+		clk	=> clk,
+		ps2_clk	=> ps2_clk,
+		ps2_data => ps2_data,
+		ps2_code_new => ps2_code_new,
+		ps2_code => ps2_code
+	)
 end rtl;

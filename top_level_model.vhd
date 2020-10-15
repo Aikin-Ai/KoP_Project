@@ -87,7 +87,7 @@ architecture rtl of top_level_model is
 			clk		  : in std_logic;
 			indicator_in  : in std_logic_vector(0 to 7);
 			data_out : out std_logic;
-			sck		  : out std_logic;
+			sck		  : out std_logic
 		);
 	
 	end component seven_segment_indicator;

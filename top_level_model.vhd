@@ -136,6 +136,6 @@ begin
 		clk	=> clk_indicator,
 		indicator_in	=> indicator_out_main,
 		data_out => indicator_out_display,
-		sck => clk_display;
+		sck => clk_display
 	);
 end rtl;

@@ -14,7 +14,6 @@ entity top_level_model is
 		clk	: in std_logic;
 		button_in	: in std_logic;
 		indicator_out	: out std_logic;
-		keyboair_in	: in std_logic;
 		ps2_clk   : in std_logic;
         ps2_data  : in std_logic
 	);

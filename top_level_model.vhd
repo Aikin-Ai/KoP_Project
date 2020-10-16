@@ -3,11 +3,6 @@ use ieee.std_logic_1164.all;
 
 entity top_level_model is
 
-	generic(
-		DATA_WIDTH : natural := 8;
-		ADDR_WIDTH : natural := 6
-	);
-
 	port(
 		clk                   : in  std_logic;
 		button_in             : in  std_logic;
@@ -23,18 +18,15 @@ architecture rtl of top_level_model is
 
 	component main_block is
 
-		generic(
-			DATA_WIDTH : natural := 8;
-			ADDR_WIDTH : natural := 6
-		);
-
 		port(
 			clk             : in  std_logic;
 			button_in       : in  std_logic;
-			ps2_code_in     : in  std_logic_vector(0 to 7);
+			ps2_code_in     : in  std_logic_vector(7 downto 0);
 			ps2_code_new_in : in  std_logic;
-			indicator_out   : out std_logic_vector(0 to 7);
-			nios            : in  std_logic
+			indicator_out   : out std_logic_vector(7 downto 0);
+			nios            : in  std_logic_vector(31 downto 0);
+			nios2			: in  std_logic_vector(31 downto 0);
+			nios3			: in  std_logic_vector(31 downto 0)
 		);
 
 	end component main_block;
@@ -68,7 +60,7 @@ architecture rtl of top_level_model is
 			ps2_clk      : in  std_logic;
 			ps2_data     : in  std_logic;
 			ps2_code_new : out std_logic;
-			ps2_code     : out std_logic_vector(0 to 7)
+			ps2_code     : out std_logic_vector(7 downto 0)
 		);
 
 	end component PS2_controller;
@@ -77,7 +69,7 @@ architecture rtl of top_level_model is
 
 		port(
 			clk          : in  std_logic;
-			indicator_in : in  std_logic_vector(0 to 7);
+			indicator_in : in  std_logic_vector(7 downto 0);
 			data_out     : out std_logic;
 			sck          : out std_logic
 		);
@@ -91,10 +83,12 @@ architecture rtl of top_level_model is
 	signal clk_main           : std_logic;
 	signal clk_ps2            : std_logic;
 	signal clk_indicator      : std_logic;
-	signal ps2_code           : std_logic_vector(0 to 7);
+	signal ps2_code           : std_logic_vector(7 downto 0);
 	signal ps2_code_new       : std_logic;
-	signal nios               : std_logic;
-	signal indicator_out_main : std_logic_vector(0 to 7);
+	signal nios               : std_logic_vector(31 downto 0);
+	signal nios2			  : std_logic_vector(31 downto 0);
+	signal nios3			  : std_logic_vector(31 downto 0);
+	signal indicator_out_main : std_logic_vector(7 downto 0);
 begin
 
 	l_bc : button_controller
@@ -126,6 +120,8 @@ begin
 			ps2_code_in     => ps2_code,
 			ps2_code_new_in => ps2_code_new,
 			nios            => nios,
+			nios2            => nios2,
+			nios3            => nios3,
 			indicator_out   => indicator_out_main
 		);
 	l_seven_segm : seven_segment_indicator

@@ -9,7 +9,8 @@ entity top_level_model is
 		indicator_out_display : out std_logic;
 		clk_display           : out std_logic;
 		ps2_clk               : in  std_logic;
-		ps2_data              : in  std_logic
+		ps2_data              : in  std_logic;
+		ready_disp 			  : out std_logic
 	);
 
 end top_level_model;
@@ -26,7 +27,8 @@ architecture rtl of top_level_model is
 			indicator_out   : out std_logic_vector(7 downto 0);
 			nios            : in  std_logic_vector(31 downto 0);
 			nios2			: in  std_logic_vector(31 downto 0);
-			nios3			: in  std_logic_vector(31 downto 0)
+			nios3			: in  std_logic_vector(31 downto 0);
+			ready_7_control	: out std_logic
 		);
 
 	end component main_block;
@@ -68,10 +70,12 @@ architecture rtl of top_level_model is
 	component seven_segment_indicator is
 
 		port(
+			ready_in	 : in std_logic;
 			clk          : in  std_logic;
 			indicator_in : in  std_logic_vector(7 downto 0);
 			data_out     : out std_logic;
-			sck          : out std_logic
+			sck          : out std_logic;
+			ready_out	 : out std_logic
 		);
 
 	end component seven_segment_indicator;
@@ -89,6 +93,7 @@ architecture rtl of top_level_model is
 	signal nios2			  : std_logic_vector(31 downto 0);
 	signal nios3			  : std_logic_vector(31 downto 0);
 	signal indicator_out_main : std_logic_vector(7 downto 0);
+	signal ready	          : std_logic;
 begin
 
 	l_bc : button_controller
@@ -122,13 +127,16 @@ begin
 			nios            => nios,
 			nios2            => nios2,
 			nios3            => nios3,
-			indicator_out   => indicator_out_main
+			indicator_out   => indicator_out_main,
+			ready_7_control => ready
 		);
 	l_seven_segm : seven_segment_indicator
 		port map(
+			ready_in	 => ready,
 			clk          => clk_indicator,
 			indicator_in => indicator_out_main,
 			data_out     => indicator_out_display,
-			sck          => clk_display
+			sck          => clk_display,
+			ready_out	 => ready_disp
 		);
 end rtl;

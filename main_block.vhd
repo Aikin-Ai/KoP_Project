@@ -55,5 +55,7 @@ begin
 			indicator_out     <= SegmentsConverter(std_logic_vector(unsigned(tmp_indicator_out) rem 10));
 		end if;
 	end process;
+	
+	ps2_reset <= button_in;
 
 end rtl;

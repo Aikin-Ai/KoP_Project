@@ -42,7 +42,7 @@ begin
 						state <= state_sck_H;
 						data_out <= data_to_slave(i);
 					else
-						state <state_start;
+						state <= state_start;
 						ready_out <= '0';
 					end if;
 				when state_sck_H =>

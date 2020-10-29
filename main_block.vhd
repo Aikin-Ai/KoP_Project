@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity main_block is
 
@@ -37,6 +38,7 @@ architecture rtl of main_block is
 			when "00001101" => return "10101110";
 			when "00001110" => return "01110110";
 			when "00001111" => return "01110100";
+			when others 	 => return "XXXXXXXX";
 		end case;
 	end function;
 	signal tmp_indicator_out : std_logic_vector(7 downto 0);

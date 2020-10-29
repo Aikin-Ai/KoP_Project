@@ -9,6 +9,7 @@ entity main_block is
 		button_in       : in  std_logic;
 		ps2_code_in     : in  std_logic_vector(7 downto 0);
 		ps2_code_new_in : in  std_logic;
+		ps2_reset		: out std_logic;
 		indicator_out   : out std_logic_vector(7 downto 0);
 		nios            : in  std_logic_vector(31 downto 0);
 		nios2           : in  std_logic_vector(31 downto 0);

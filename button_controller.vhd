@@ -14,19 +14,19 @@ end button_controller;
 architecture rtl of button_controller is
 
 begin
-	strobe: process(clk) is
+	strobe : process(clk) is
 		variable counter : integer := 0;
 	begin
-		if(rising_edge(clk)) then
-			if(counter > 0) then
+		if (rising_edge(clk)) then
+			if (counter > 0) then
 				button_out <= '0';
-				if(counter < 10) then
+				if (counter < 10) then
 					counter := counter + 1;
 				else
 					counter := 0;
 				end if;
 			elsif (counter = 0 and button_in = '1') then
-				counter := 1;
+				counter    := 1;
 				button_out <= '1';
 			end if;
 		end if;

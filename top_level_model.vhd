@@ -23,7 +23,7 @@ architecture rtl of top_level_model is
 			button_in       : in  std_logic;
 			ps2_code_in     : in  std_logic_vector(7 downto 0);
 			ps2_code_new_in : in  std_logic;
-			ps2_reset       : out  std_logic;
+			ps2_reset       : out std_logic;
 			indicator_out   : out std_logic_vector(7 downto 0);
 			nios            : in  std_logic_vector(31 downto 0);
 			nios2           : in  std_logic_vector(31 downto 0);
@@ -79,7 +79,7 @@ architecture rtl of top_level_model is
 		);
 
 	end component seven_segment_controller;
-	
+
 	signal clk_button         : std_logic;
 	signal button_out         : std_logic;
 	signal clk_main           : std_logic;
@@ -87,7 +87,7 @@ architecture rtl of top_level_model is
 	signal clk_indicator      : std_logic;
 	signal ps2_code           : std_logic_vector(7 downto 0);
 	signal ps2_code_new       : std_logic;
-	signal ps2_reset		  : std_logic;
+	signal ps2_reset          : std_logic;
 	signal nios               : std_logic_vector(31 downto 0);
 	signal nios2              : std_logic_vector(31 downto 0);
 	signal nios3              : std_logic_vector(31 downto 0);

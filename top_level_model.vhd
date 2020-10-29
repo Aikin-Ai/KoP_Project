@@ -8,7 +8,6 @@ entity top_level_model is
 		button_in             : in  std_logic;
 		indicator_out_display : out std_logic;
 		clk_display           : out std_logic;
-		ps2_clk               : in  std_logic;
 		ps2_data              : in  std_logic;
 		ready_disp            : out std_logic
 	);
@@ -24,6 +23,7 @@ architecture rtl of top_level_model is
 			button_in       : in  std_logic;
 			ps2_code_in     : in  std_logic_vector(7 downto 0);
 			ps2_code_new_in : in  std_logic;
+			ps2_reset       : out std_logic;
 			indicator_out   : out std_logic_vector(7 downto 0);
 			nios            : in  std_logic_vector(31 downto 0);
 			nios2           : in  std_logic_vector(31 downto 0);
@@ -59,7 +59,7 @@ architecture rtl of top_level_model is
 
 		port(
 			clk          : in  std_logic;
-			ps2_clk      : in  std_logic;
+			reset        : in  std_logic;
 			ps2_data     : in  std_logic;
 			ps2_code_new : out std_logic;
 			ps2_code     : out std_logic_vector(7 downto 0)
@@ -79,7 +79,7 @@ architecture rtl of top_level_model is
 		);
 
 	end component seven_segment_controller;
-	
+
 	signal clk_button         : std_logic;
 	signal button_out         : std_logic;
 	signal clk_main           : std_logic;
@@ -87,6 +87,7 @@ architecture rtl of top_level_model is
 	signal clk_indicator      : std_logic;
 	signal ps2_code           : std_logic_vector(7 downto 0);
 	signal ps2_code_new       : std_logic;
+	signal ps2_reset          : std_logic;
 	signal nios               : std_logic_vector(31 downto 0);
 	signal nios2              : std_logic_vector(31 downto 0);
 	signal nios3              : std_logic_vector(31 downto 0);
@@ -111,7 +112,7 @@ begin
 	l_ps2 : PS2_controller
 		port map(
 			clk          => clk_ps2,
-			ps2_clk      => ps2_clk,
+			reset        => ps2_reset,
 			ps2_data     => ps2_data,
 			ps2_code_new => ps2_code_new,
 			ps2_code     => ps2_code
@@ -122,6 +123,7 @@ begin
 			button_in       => button_out,
 			ps2_code_in     => ps2_code,
 			ps2_code_new_in => ps2_code_new,
+			ps2_reset       => ps2_reset,
 			nios            => nios,
 			nios2           => nios2,
 			nios3           => nios3,

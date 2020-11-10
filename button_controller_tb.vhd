@@ -25,7 +25,7 @@ begin
         wait for 1 ms;
         clk <= '1';
         wait for 1 ms;
-    end process
+    end process;
     process
     begin
         button_in <= '0';
@@ -40,6 +40,7 @@ begin
         wait for 15 ms;
         button_in <= '1';
         wait for 200 ms;
-        buton_in <= '0';
+        button_in <= '0';
         wait for 400 ms;
+    end process;
 end rtl;

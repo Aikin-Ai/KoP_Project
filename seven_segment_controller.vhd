@@ -6,7 +6,7 @@ entity seven_segment_controller is
 	port(
 		ready_in     : in  std_logic;
 		clk          : in  std_logic;
-		indicator_in : in  std_logic_vector(7 downto 0);
+		indicator_in : in  std_logic_vector(15 downto 0);
 		data_out     : out std_logic;
 		sck          : out std_logic;
 		ready_out    : out std_logic
@@ -18,7 +18,7 @@ architecture rtl of seven_segment_controller is
 
 	type state_type is (state_start, state_data_out, state_sck_H, state_sck_L);
 	signal state : state_type;
-	signal data_to_slave: std_logic_vector(7 downto 0);
+	signal data_to_slave: std_logic_vector(15 downto 0);
 begin
 	process(clk) is
 		variable i: integer := 0;
@@ -37,7 +37,7 @@ begin
 						ready_out <= '0';
 					end if;
 				when state_data_out =>
-					if(i < 8) then
+					if(i < 16) then
 						state <= state_sck_H;
 						data_out <= data_to_slave(i);
 					else

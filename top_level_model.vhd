@@ -24,7 +24,7 @@ architecture rtl of top_level_model is
 			ps2_code_in     : in  std_logic_vector(7 downto 0);
 			ps2_code_new_in : in  std_logic;
 			ps2_reset       : out std_logic;
-			indicator_out   : out std_logic_vector(7 downto 0);
+			indicator_out   : out std_logic_vector(15 downto 0);
 			nios            : in  std_logic_vector(31 downto 0);
 			nios2           : in  std_logic_vector(31 downto 0);
 			nios3           : in  std_logic_vector(31 downto 0);
@@ -72,7 +72,7 @@ architecture rtl of top_level_model is
 		port(
 			ready_in     : in  std_logic;
 			clk          : in  std_logic;
-			indicator_in : in  std_logic_vector(7 downto 0);
+			indicator_in : in  std_logic_vector(15 downto 0);
 			data_out     : out std_logic;
 			sck          : out std_logic;
 			ready_out    : out std_logic
@@ -91,7 +91,7 @@ architecture rtl of top_level_model is
 	signal nios               : std_logic_vector(31 downto 0);
 	signal nios2              : std_logic_vector(31 downto 0);
 	signal nios3              : std_logic_vector(31 downto 0);
-	signal indicator_out_main : std_logic_vector(7 downto 0);
+	signal indicator_out_main : std_logic_vector(15 downto 0);
 	signal ready              : std_logic;
 begin
 

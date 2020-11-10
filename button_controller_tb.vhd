@@ -22,9 +22,9 @@ begin
     process
     begin
         clk <= '0';
-        wait for 1 ms;
+        wait for 500 us;
         clk <= '1';
-        wait for 1 ms;
+        wait for 500 us;
     end process;
     process
     begin

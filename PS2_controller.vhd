@@ -17,7 +17,7 @@ architecture rtl of PS2_controller is
 
 	type state_type is (start, s0, s1, s2, s3, s4, s5, s6, s7, p, stop);
 
-	signal state : state_type;
+	signal state : state_type := stop;
 
 	signal tmp : std_logic_vector(7 downto 0);
 
@@ -26,7 +26,7 @@ begin
 	process(clk, reset)
 	begin
 		if reset = '1' then
-			state <= start;
+			state <= stop;
 		elsif (clk'event and clk = '0') then
 			case state is
 				when start =>
@@ -54,21 +54,21 @@ begin
 		ps2_code <= (others => '0');
 		case state is
 			when start => ps2_code_new <= '0';
-			when s0 => tmp(0)       <= ps2_data;
+			when s0 => tmp(7)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s1 => tmp(1)       <= ps2_data;
+			when s1 => tmp(6)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s2 => tmp(2)       <= ps2_data;
+			when s2 => tmp(5)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s3 => tmp(3)       <= ps2_data;
+			when s3 => tmp(4)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s4 => tmp(4)       <= ps2_data;
+			when s4 => tmp(3)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s5 => tmp(5)       <= ps2_data;
+			when s5 => tmp(2)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s6 => tmp(6)       <= ps2_data;
+			when s6 => tmp(1)       <= ps2_data;
 				ps2_code_new <= '0';
-			when s7 => tmp(7)       <= ps2_data;
+			when s7 => tmp(0)       <= ps2_data;
 				ps2_code_new <= '0';
 			when p => ps2_code_new <= '0';
 			when stop =>

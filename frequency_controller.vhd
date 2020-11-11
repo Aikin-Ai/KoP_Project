@@ -8,7 +8,7 @@ entity frequency_controller is
 		FREQUENCY_OUT_B : natural := 1_000;
 		FREQUENCY_OUT_M : natural := 1_000_000;
 		FREQUENCY_OUT_P : natural := 10_000;
-		FREQUENCY_OUT_I : natural := 200
+		FREQUENCY_OUT_I : natural := 16_000_000
 	);
 
 	port(

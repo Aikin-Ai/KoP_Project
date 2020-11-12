@@ -35,7 +35,7 @@ begin
                 wait for 50 us;
             end loop;
             clk <= '1';
-            wait for 600 us;
+            wait for 700 us;
     end process;
 	process
         begin
@@ -68,6 +68,6 @@ begin
             ps2_data <= '1'; --Обозначение окончания передачи
             wait for 400 us;
             reset    <= '1'; --Сброс
-            wait for 200 us;
+            wait for 400 us;
 	end process;
 end rtl;

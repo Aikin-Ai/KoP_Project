@@ -21,17 +21,21 @@ architecture rtl of PS2_controller is
 
 	signal tmp : std_logic_vector(7 downto 0);
 
+	signal flipflop : std_logic := '0';
+
 begin
 
 	process(clk, reset)
 	begin
 		if reset = '1' then
 			state <= stop;
+			flipflop <= '1';
 		elsif (clk'event and clk = '0') then
 			case state is
 				when start =>
 					if (ps2_data = '0') then
 						state <= s0;
+						flipflop <= '0';
 					else
 						state <= start;
 					end if;
@@ -49,7 +53,7 @@ begin
 		end if;
 	end process;
 
-	process(state)
+	process(state, flipflop)
 	begin
 		ps2_code <= (others => '0');
 		case state is
@@ -74,7 +78,11 @@ begin
 			when stop =>
 				if (ps2_data = '1') then
 					ps2_code_new <= '1';
-					ps2_code     <= tmp;
+					if flipflop = '0' then
+						ps2_code <= tmp;
+					elsif flipflop = '1' then
+						ps2_code <= (others => '0');
+					end if;
 				else
 					ps2_code_new <= '0';
 				end if;

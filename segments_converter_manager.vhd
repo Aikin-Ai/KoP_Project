@@ -46,11 +46,14 @@ begin
 			indicator_out(7 downto 0) <= SegmentsConverter(ps2_code_in(3 downto 0));
 			if (i>0) then
 				ready_7_control <= '0';
-				i:=0;
 			else
 				ready_7_control <= '1';
 				i:=i+1;
 			end if;
+		else
+			ready_7_control <= '0';
+			i:=0;
 		end if;
 	end process;
+
 end rtl;

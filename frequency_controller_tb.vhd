@@ -10,17 +10,15 @@ architecture rtl of frequency_controller_tb is
 		clk           : in  std_logic;
 		clk_button    : out std_logic;
 		clk_main      : out std_logic;
-		clk_ps2       : out std_logic;
 		clk_indicator : out std_logic
 	);
     end component frequency_controller;
     signal clk: std_logic;
     signal clk_button: std_logic;
     signal clk_main: std_logic;
-    signal clk_ps2: std_logic;
     signal clk_indicator: std_logic;
 begin
-    inst0: frequency_controller port map(clk,clk_button,clk_main,clk_ps2,clk_indicator);
+    inst0: frequency_controller port map(clk,clk_button,clk_main,clk_indicator);
     process
     begin
         clk <= '0';

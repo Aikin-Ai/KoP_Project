@@ -5,6 +5,7 @@ entity top_level_model is
 
 	port(
 		clk                   : in  std_logic;
+		clk_ps2				  : in  std_logic;
 		button_in             : in  std_logic;
 		indicator_out_display : out std_logic;
 		clk_display           : out std_logic;
@@ -49,7 +50,6 @@ architecture rtl of top_level_model is
 			clk           : in  std_logic;
 			clk_button    : out std_logic;
 			clk_main      : out std_logic;
-			clk_ps2       : out std_logic;
 			clk_indicator : out std_logic
 		);
 
@@ -83,7 +83,6 @@ architecture rtl of top_level_model is
 	signal clk_button         : std_logic;
 	signal button_out         : std_logic;
 	signal clk_main           : std_logic;
-	signal clk_ps2            : std_logic;
 	signal clk_indicator      : std_logic;
 	signal ps2_code           : std_logic_vector(7 downto 0);
 	signal ps2_code_new       : std_logic;
@@ -106,7 +105,6 @@ begin
 			clk           => clk,
 			clk_button    => clk_button,
 			clk_main      => clk_main,
-			clk_ps2       => clk_ps2,
 			clk_indicator => clk_indicator
 		);
 	l_ps2 : PS2_controller

@@ -7,7 +7,6 @@ entity frequency_controller is
 		FREQUENCY_IN    : natural := 50_000_000;
 		FREQUENCY_OUT_B : natural := 1_000;
 		FREQUENCY_OUT_M : natural := 1_000_000;
-		FREQUENCY_OUT_P : natural := 10_000;
 		FREQUENCY_OUT_I : natural := 16_000_000
 	);
 
@@ -15,7 +14,6 @@ entity frequency_controller is
 		clk           : in  std_logic;
 		clk_button    : out std_logic;
 		clk_main      : out std_logic;
-		clk_ps2       : out std_logic;
 		clk_indicator : out std_logic
 	);
 
@@ -47,12 +45,6 @@ begin
 		port map(
 			clk     => clk,
 			clk_out => clk_main
-		);
-	l_p : frequency_manager
-		generic map(FREQUENCY_IN, FREQUENCY_OUT_P)
-		port map(
-			clk     => clk,
-			clk_out => clk_ps2
 		);
 	l_i : frequency_manager
 		generic map(FREQUENCY_IN, FREQUENCY_OUT_I)

@@ -6,6 +6,7 @@ entity segments_converter_manager is
 
 	port(
 		clk 						: in std_logic;
+		button_in       		: in  std_logic;
 		ps2_code_new_in		: in std_logic;
 		ps2_code_in    	   : in  std_logic_vector(7 downto 0);
 		indicator_out 			: out std_logic_vector(15 downto 0);
@@ -40,19 +41,33 @@ architecture rtl of segments_converter_manager is
 begin
 	process(clk) is
 		variable i: integer := 0;
+		variable j: integer := 0;
 	begin
-		if (ps2_code_new_in = '1') then
-			indicator_out(15 downto 8) <= SegmentsConverter(ps2_code_in(7 downto 4));
-			indicator_out(7 downto 0) <= SegmentsConverter(ps2_code_in(3 downto 0));
-			if (i>0) then
-				ready_7_control <= '0';
-			else
+		if (button_in = '1') then
+			indicator_out <= "0000000000000000";
+			
+			if (j>0) then
 				ready_7_control <= '1';
-				i:=i+1;
+			else
+				ready_7_control <= '0';
+				j:=j+1;
 			end if;
 		else
 			ready_7_control <= '0';
-			i:=0;
+			j:=0;
+			if (ps2_code_new_in = '1') then
+				indicator_out(15 downto 8) <= SegmentsConverter(ps2_code_in(7 downto 4));
+				indicator_out(7 downto 0) <= SegmentsConverter(ps2_code_in(3 downto 0));
+				if (i>0) then
+					ready_7_control <= '0';
+				else
+					ready_7_control <= '1';
+					i:=i+1;
+				end if;
+			else
+				ready_7_control <= '0';
+				i:=0;
+			end if;
 		end if;
 	end process;
 

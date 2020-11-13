@@ -24,6 +24,7 @@ architecture rtl of main_block is
 	
 	port(
 		clk 						: in std_logic;
+		button_in       		: in  std_logic;
 		ps2_code_new_in		: in std_logic;
 		ps2_code_in   		   : in  std_logic_vector(7 downto 0);
 		indicator_out		   : out std_logic_vector(15 downto 0);
@@ -35,11 +36,11 @@ begin
 	l_s_c : segments_converter_manager
 	port map(
 		clk     => clk,
+		button_in => button_in,
 		ps2_code_new_in => ps2_code_new_in,
 		ps2_code_in => ps2_code_in,
 		indicator_out => indicator_out,
 		ready_7_control => ready_7_control
 	);
-	
 	ps2_reset <= button_in;
 end rtl;

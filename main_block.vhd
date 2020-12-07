@@ -11,9 +11,10 @@ entity main_block is
 		ps2_code_new_in : in  std_logic;
 		ps2_reset		 : out  std_logic;
 		indicator_out   : out std_logic_vector(15 downto 0);
-		nios            : in  std_logic_vector(31 downto 0);
+		nios            : out  std_logic_vector(31 downto 0);
 		nios2           : in  std_logic_vector(31 downto 0);
 		nios3           : in  std_logic_vector(31 downto 0);
+		result_out 		: out std_logic_vector(31 downto 0);
 		ready_7_control : out std_logic
 	);
 
@@ -43,4 +44,13 @@ begin
 		ready_7_control => ready_7_control
 	);
 	ps2_reset <= button_in;
+	process(ps2_code_new_in)
+	begin
+		nios(31 downto 24) <= ps2_code_in;
+		nios(23 downto 0) <= (others => '0');
+	end process;
+	process(nios2)
+	begin
+		result_out <= nios2;
+	end process;
 end rtl;

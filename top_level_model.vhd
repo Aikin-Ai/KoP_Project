@@ -10,7 +10,11 @@ entity top_level_model is
 		indicator_out_display : out std_logic;
 		clk_display           : out std_logic;
 		ps2_data              : in  std_logic;
-		ready_disp            : out std_logic
+		ready_disp            : out std_logic;
+		nios				  : out std_logic_vector(31 downto 0);
+		nios2				  : in std_logic_vector(31 downto 0);
+		nios3				  : in std_logic_vector(31 downto 0);
+		result_out			  : out std_logic_vector(31 downto 0)
 	);
 
 end top_level_model;
@@ -26,9 +30,10 @@ architecture rtl of top_level_model is
 			ps2_code_new_in : in  std_logic;
 			ps2_reset       : out std_logic;
 			indicator_out   : out std_logic_vector(15 downto 0);
-			nios            : in  std_logic_vector(31 downto 0);
+			nios            : out  std_logic_vector(31 downto 0);
 			nios2           : in  std_logic_vector(31 downto 0);
 			nios3           : in  std_logic_vector(31 downto 0);
+			result_out	 	: out std_logic_vector(31 downto 0);
 			ready_7_control : out std_logic
 		);
 
@@ -87,9 +92,9 @@ architecture rtl of top_level_model is
 	signal ps2_code           : std_logic_vector(7 downto 0);
 	signal ps2_code_new       : std_logic;
 	signal ps2_reset          : std_logic;
-	signal nios               : std_logic_vector(31 downto 0);
-	signal nios2              : std_logic_vector(31 downto 0);
-	signal nios3              : std_logic_vector(31 downto 0);
+	--signal nios               : std_logic_vector(31 downto 0);
+	--signal nios2              : std_logic_vector(31 downto 0);
+	--signal nios3              : std_logic_vector(31 downto 0);
 	signal indicator_out_main : std_logic_vector(15 downto 0);
 	signal ready              : std_logic;
 begin
@@ -125,6 +130,7 @@ begin
 			nios            => nios,
 			nios2           => nios2,
 			nios3           => nios3,
+			result_out		=> result_out,
 			indicator_out   => indicator_out_main,
 			ready_7_control => ready
 		);

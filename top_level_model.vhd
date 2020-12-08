@@ -13,7 +13,7 @@ entity top_level_model is
 		ready_disp            : out std_logic;
 		nios				  : out std_logic_vector(31 downto 0);
 		nios2				  : in std_logic_vector(31 downto 0);
-		nios3				  : in std_logic_vector(31 downto 0);
+		nios3				  : in std_logic;
 		result_out			  : out std_logic_vector(31 downto 0)
 	);
 
@@ -32,7 +32,7 @@ architecture rtl of top_level_model is
 			indicator_out   : out std_logic_vector(15 downto 0);
 			nios            : out  std_logic_vector(31 downto 0);
 			nios2           : in  std_logic_vector(31 downto 0);
-			nios3           : in  std_logic_vector(31 downto 0);
+			nios3           : in  std_logic;
 			result_out	 	: out std_logic_vector(31 downto 0);
 			ready_7_control : out std_logic
 		);

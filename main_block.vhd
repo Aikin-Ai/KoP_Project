@@ -13,7 +13,7 @@ entity main_block is
 		indicator_out   : out std_logic_vector(15 downto 0);
 		nios            : out  std_logic_vector(31 downto 0);
 		nios2           : in  std_logic_vector(31 downto 0);
-		nios3           : in  std_logic_vector(31 downto 0);
+		nios3           : in  std_logic;
 		result_out 		: out std_logic_vector(31 downto 0);
 		ready_7_control : out std_logic
 	);

@@ -14,7 +14,6 @@ entity main_block is
 		nios            : out  std_logic_vector(31 downto 0);
 		nios2           : in  std_logic_vector(31 downto 0);
 		nios3           : in  std_logic;
-		result_out 		: out std_logic_vector(31 downto 0);
 		ready_7_control : out std_logic
 	);
 
@@ -33,24 +32,25 @@ architecture rtl of main_block is
 	);
 
 	end component segments_converter_manager;
+	signal reset : std_logic;
 begin
 	l_s_c : segments_converter_manager
 	port map(
 		clk     => clk,
-		button_in => button_in,
+		button_in => reset,
 		ps2_code_new_in => ps2_code_new_in,
 		ps2_code_in => ps2_code_in,
 		indicator_out => indicator_out,
 		ready_7_control => ready_7_control
 	);
-	ps2_reset <= button_in;
-	process(ps2_code_new_in)
+	process(button_in)
 	begin
-		nios(31 downto 24) <= ps2_code_in;
-		nios(23 downto 0) <= (others => '0');
+		nios(31) <= button_in;
+		nios(30 downto 0) <= (others => '0');
 	end process;
 	process(nios2)
 	begin
-		result_out <= nios2;
+		reset <= nios2(31);
 	end process;
+	ps2_reset <= reset;
 end rtl;

@@ -7,18 +7,18 @@ end button_controller_tb;
 architecture rtl of button_controller_tb is
     component button_controller is
 
-		port(
-			clk        : in  std_logic;
-			button_in  : in  std_logic;
-			button_out : out std_logic
-		);
+        port(
+            clk        : in  std_logic;
+            button_in  : in  std_logic;
+            button_out : out std_logic
+        );
 
     end component button_controller;
-    signal clk: std_logic;
-    signal button_in: std_logic;
-    signal button_out: std_logic;
+    signal clk        : std_logic;
+    signal button_in  : std_logic;
+    signal button_out : std_logic;
 begin
-    inst0: button_controller port map(clk,button_in,button_out);
+    inst0 : button_controller port map(clk, button_in, button_out);
     process
     begin
         clk <= '0';
